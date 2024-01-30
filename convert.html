@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMP to Array Converter</title>
+</head>
+<body>
+    <input type="file" id="imageInput" accept=".bmp">
+    <script>
+        document.getElementById('imageInput').addEventListener('change', handleImage);
+
+        function handleImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0, img.width, img.height);
+
+                        const imageData = ctx.getImageData(0, 0, img.width, img.height);
+                        const pixelData = imageData.data;
+
+                        const resultArray = [];
+
+                        for (let i = 0; i < pixelData.length; i += 4) {
+                            const r = pixelData[i];
+                            const g = pixelData[i + 1];
+                            const b = pixelData[i + 2];
+                            const grayscale = (r + g + b) / 3;
+                            const binaryValue = grayscale > 128 ? 0 : 1;
+
+                            if (!resultArray[Math.floor(i / 4 / img.width)]) {
+                                resultArray[Math.floor(i / 4 / img.width)] = [];
+                            }
+
+                            resultArray[Math.floor(i / 4 / img.width)].push(binaryValue);
+                        }
+
+                        console.log(resultArray);
+                    };
+
+                    img.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

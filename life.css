@@ -42,3 +42,10 @@ td.live {
     background-color: #CC4774;
     border-radius: 10px;
 }
+
+#clockCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+}
