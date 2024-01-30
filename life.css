@@ -1,0 +1,44 @@
+body {
+    padding: 20px;
+    background-color: #444;
+}
+
+#gridContainer {
+    padding-bottom: 10px;
+}
+
+table {
+    background-color: #C5D6C6;
+    border-spacing: 0;
+}
+
+td {
+    border: 1px solid #F1F5DA;
+    border-radius: 3px;
+    width: 10px;
+    height: 3px;
+}
+
+span {
+    color: #222;
+}
+
+#start,
+#clear,
+#random {
+    padding: .75em;
+    border-radius: 5px;
+    border: none;    
+    background: linear-gradient(
+        to bottom right,
+        #C5DEC6, #587559);
+}
+
+td.dead {
+    background-color: transparent;
+}
+
+td.live {
+    background-color: #CC4774;
+    border-radius: 10px;
+}
