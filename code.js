@@ -178,7 +178,7 @@ function startButtonHandler() {
   }
 
   // Update the clock every second
-    setInterval(drawClock, 3000);
+    setInterval(drawClock, 300);
 
     // Initial draw
     drawClock();
@@ -312,7 +312,7 @@ function drawClock() {
       if (typeof twoDArray[i][j] !== "undefined") {
         if (twoDArray[i][j] == 1) {
           var cell = document.getElementById(i + offsetY + "_" + (j + offsetX));
-          cell.setAttribute("class", "live");
+          //cell.setAttribute("class", "live");
           grid[i + offsetY][j + offsetX] = 1;
         }
       }
