@@ -7,7 +7,7 @@ var grid = new Array(rows);
 var nextGrid = new Array(rows);
 
 var timer;
-var reproductionTime = 800;
+var reproductionTime = 400;
 
 function initializeGrids() {
   for (var i = 0; i < rows; i++) {
@@ -130,7 +130,6 @@ function randomButtonHandler() {
   for (var i = 0; i < rows; i++) {
     for (var j = 0; j < cols; j++) {
       if (typeof timeArray[i][j] !== "undefined") {
-        console.log("will draw");
         if (timeArray[i][j] == 1) {
           var cell = document.getElementById(i + offsetY + "_" + (j + offsetX));
           cell.setAttribute("class", "live");
@@ -179,7 +178,7 @@ function startButtonHandler() {
   }
 
   // Update the clock every second
-    setInterval(drawClock, 1000);
+    setInterval(drawClock, 3000);
 
     // Initial draw
     drawClock();
@@ -267,17 +266,20 @@ function drawClock() {
 
   // Clear the canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Set font and color
-  ctx.font = "63px Arial";
-  ctx.fillStyle = "#000";
-
+  
   // Get current time
   const now = new Date();
   const timeString = now.toLocaleTimeString();
 
+  // Set font and color
   // Draw the time on the canvas
+  ctx.font = "63px Arial";
+//   ctx.strokeStyle = 'black';
+//   ctx.lineWidth = 8;
+//   ctx.strokeText(timeString, 0, 49);
+  ctx.fillStyle = 'black';
   ctx.fillText(timeString, 0, 49);
+
 
   // Convert canvas to 2D array
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
@@ -308,7 +310,6 @@ function drawClock() {
   for (var i = 0; i < rows; i++) {
     for (var j = 0; j < cols; j++) {
       if (typeof twoDArray[i][j] !== "undefined") {
-        console.log("will draw");
         if (twoDArray[i][j] == 1) {
           var cell = document.getElementById(i + offsetY + "_" + (j + offsetX));
           cell.setAttribute("class", "live");

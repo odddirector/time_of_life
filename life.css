@@ -1,6 +1,16 @@
 body {
-    padding: 20px;
-    background-color: #444;
+    padding: 0;
+    background-color: white;
+}
+
+canvas {
+    opacity: 0;
+}
+
+.bungee-outline-regular {
+    font-family: "Bungee Outline", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 #gridContainer {
@@ -8,38 +18,46 @@ body {
 }
 
 table {
-    background-color: #C5D6C6;
+    background-color: transparent;
     border-spacing: 0;
 }
 
 td {
-    border: 1px solid #F1F5DA;
-    border-radius: 3px;
+    border: none;
+    /* border-radius: 3px; */
     width: 10px;
     height: 3px;
 }
 
-span {
-    color: #222;
+button span {
+    color: #757575 !important;
 }
 
-#start,
-#clear,
-#random {
+
+button {
     padding: .75em;
     border-radius: 5px;
-    border: none;    
-    background: linear-gradient(
-        to bottom right,
-        #C5DEC6, #587559);
+    border: 1px solid #6d6d6d;   
+    background-color: transparent;
+    color: #757575 !important;
 }
+
 
 td.dead {
-    background-color: transparent;
+    background-color: transparent
 }
 
+
+
 td.live {
-    background-color: #CC4774;
+    /* background-color: #CC4774;
+    border-radius: 10px; */
+    border-radius: 10px;
+    background-color:  rgb(23, 23, 23);
+}
+
+td.static {
+    background-color: blue;
     border-radius: 10px;
 }
 
