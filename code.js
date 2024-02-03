@@ -1,5 +1,5 @@
-var rows = 90;
-var cols = 300;
+var rows = 180;
+var cols = 600;
 
 var playing = false;
 
@@ -7,7 +7,8 @@ var grid = new Array(rows);
 var nextGrid = new Array(rows);
 
 var timer;
-var reproductionTime = 400;
+var reproductionTime = 100;
+let clockInterval = 200;
 
 function initializeGrids() {
   for (var i = 0; i < rows; i++) {
@@ -178,7 +179,7 @@ function startButtonHandler() {
   }
 
   // Update the clock every second
-    setInterval(drawClock, 300);
+    setInterval(drawClock, clockInterval);
 
     // Initial draw
     drawClock();
@@ -273,12 +274,12 @@ function drawClock() {
 
   // Set font and color
   // Draw the time on the canvas
-  ctx.font = "63px Arial";
+  ctx.font = "137px Arial";
 //   ctx.strokeStyle = 'black';
 //   ctx.lineWidth = 8;
 //   ctx.strokeText(timeString, 0, 49);
   ctx.fillStyle = 'black';
-  ctx.fillText(timeString, 0, 49);
+  ctx.fillText(timeString, 0, 110);
 
 
   // Convert canvas to 2D array
