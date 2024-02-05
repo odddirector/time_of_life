@@ -53,8 +53,12 @@ function createTable() {
   }
   var table = document.createElement("table");
   table.id = "lifeTable";
+  
+  console.log("created table");
+  console.log("rows = " + rows);
 
   for (var i = 0; i < rows; i++) {
+    console.log("added row");
     var tr = document.createElement("tr");
     for (var j = 0; j < cols; j++) {
       //
@@ -380,21 +384,25 @@ bgColorPicker.addEventListener('change', (event) => {
 
 
 
-let rowsNumber = document.getElementById('rowsNumber');
+// let fidelity = document.getElementById('fidelity');
 
-// rowsNumber.addEventListener('mouseup', (event) => {
+// fidelity.addEventListener('mouseup', (event) => {
+
+//     let rowStep = rows / 5;
+//     let colStep = cols / 5;
+
 //     playing = false;
 
 //     clearInterval(clockSetInt);
     
 //     // change the grid variables 
-//     rows = rowsNumber;
+//     //rows = fidelity.value;
 
 //     document.getElementById("lifeTable").remove();
 
-//     // initialize();
+//     initialize();
 
-//     // playing = true;
-//     // runClock();
-//     // play();
+//     playing = true;
+//     runClock();
+//     play();
 // });

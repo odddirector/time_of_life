@@ -20,13 +20,16 @@ canvas {
 table {
     background-color: transparent;
     border-spacing: 0;
+    width: 100%;
+    max-width: 100%;
 }
 
 td {
     border: none;
     /* border-radius: 3px; */
-    width: 2px;
-    height: 1px;
+    width: auto;
+    height: 0;
+    padding-bottom: 0.13%;
 }
 
 button span {
