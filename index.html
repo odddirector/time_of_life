@@ -6,7 +6,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee+Outline&family=Londrina+Outline&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="life.css">    
+        <link rel="stylesheet" href="life.css"> 
+        <style id="userStyles"></style> 
     </head>
 <body>
 
@@ -17,7 +18,19 @@
     <div class="controls">
     <button id="start"><span>Start</span></button>
     <button id="clear"><span>Clear</span></button>
-    <button id="random"><span>Random</span></button>
+    
+    <label for="cellWidth">Cell width</label>
+    <input type="range" min="1" max="10" value="2" id="cellWidth">
+
+    <label for="cellBorder">Cell border radius %</label>
+    <input type="range" min="0" max="100" value="100" id="cellBorder">
+
+    <label for="rowsNumber">Rows</label>
+    <input type="range" min="4" max="300" value="180" id="rowsNumber">
+
+    <input type="color" id="colorPicker">
+    <input type="color" id="bgColorPicker">
+
     </div>
 
     <canvas id="clockCanvas" width="530" height="126"></canvas>

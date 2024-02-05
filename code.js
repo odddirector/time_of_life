@@ -10,6 +10,8 @@ var timer;
 var reproductionTime = 100;
 let clockInterval = 200;
 
+let clockSetInt;
+
 function initializeGrids() {
   for (var i = 0; i < rows; i++) {
     grid[i] = new Array(cols);
@@ -40,7 +42,6 @@ function initialize() {
   createTable();
   initializeGrids();
   resetGrids();
-  setupControlButtons();
 }
 
 // Lay out the board
@@ -51,6 +52,7 @@ function createTable() {
     console.error("Problem: No div for the drid table!");
   }
   var table = document.createElement("table");
+  table.id = "lifeTable";
 
   for (var i = 0; i < rows; i++) {
     var tr = document.createElement("tr");
@@ -105,41 +107,41 @@ function setupControlButtons() {
   clearButton.onclick = clearButtonHandler;
 
   // button to set random initial state
-  var randomButton = document.getElementById("random");
-  randomButton.onclick = randomButtonHandler;
+//   var randomButton = document.getElementById("random");
+//   randomButton.onclick = randomButtonHandler;
 }
 
-function randomButtonHandler() {
-  //if (playing) return;
-  //console.log(two);
+// function randomButtonHandler() {
+//   //if (playing) return;
+//   //console.log(two);
 
-  //clearButtonHandler();
-  // for (var i = 0; i < rows; i++) {
-  //     for (var j = 0; j < cols; j++) {
-  //         var isLive = Math.round(Math.random());
-  //         if (isLive == 1) {
-  //             var cell = document.getElementById(i + "_" + j);
-  //             cell.setAttribute("class", "live");
-  //             grid[i][j] = 1;
-  //         }
-  //     }
-  // }
+//   //clearButtonHandler();
+//   // for (var i = 0; i < rows; i++) {
+//   //     for (var j = 0; j < cols; j++) {
+//   //         var isLive = Math.round(Math.random());
+//   //         if (isLive == 1) {
+//   //             var cell = document.getElementById(i + "_" + j);
+//   //             cell.setAttribute("class", "live");
+//   //             grid[i][j] = 1;
+//   //         }
+//   //     }
+//   // }
 
-  let offsetX = 20;
-  let offsetY = 18;
+//   let offsetX = 20;
+//   let offsetY = 18;
 
-  for (var i = 0; i < rows; i++) {
-    for (var j = 0; j < cols; j++) {
-      if (typeof timeArray[i][j] !== "undefined") {
-        if (timeArray[i][j] == 1) {
-          var cell = document.getElementById(i + offsetY + "_" + (j + offsetX));
-          cell.setAttribute("class", "live");
-          grid[i + offsetY][j + offsetX] = 1;
-        }
-      }
-    }
-  }
-}
+//   for (var i = 0; i < rows; i++) {
+//     for (var j = 0; j < cols; j++) {
+//       if (typeof timeArray[i][j] !== "undefined") {
+//         if (timeArray[i][j] == 1) {
+//           var cell = document.getElementById(i + offsetY + "_" + (j + offsetX));
+//           cell.setAttribute("class", "live");
+//           grid[i + offsetY][j + offsetX] = 1;
+//         }
+//       }
+//     }
+//   }
+// }
 
 // clear the grid
 function clearButtonHandler() {
@@ -178,12 +180,16 @@ function startButtonHandler() {
     play();
   }
 
-  // Update the clock every second
-    setInterval(drawClock, clockInterval);
+  runClock();
+
+}
+
+function runClock() {
+    // Update the clock every second
+    clockSetInt = setInterval(drawClock, clockInterval);
 
     // Initial draw
     drawClock();
-
 }
 
 // run the life game
@@ -262,6 +268,9 @@ function countNeighbors(row, col) {
 
 // Function to draw the current time on the canvas
 function drawClock() {
+  
+  if (playing == false) return;
+
   const canvas = document.getElementById("clockCanvas");
   const ctx = canvas.getContext("2d");
 
@@ -308,8 +317,8 @@ function drawClock() {
   let offsetX = 20;
   let offsetY = 18;
 
-  for (var i = 0; i < rows; i++) {
-    for (var j = 0; j < cols; j++) {
+  for (var i = 0; i < canvas.height; i++) {
+    for (var j = 0; j < canvas.width; j++) {
       if (typeof twoDArray[i][j] !== "undefined") {
         if (twoDArray[i][j] == 1) {
           var cell = document.getElementById(i + offsetY + "_" + (j + offsetX));
@@ -322,7 +331,70 @@ function drawClock() {
 
 }
 
-// Start everything
-window.onload = initialize;
+// Events
+
+window.addEventListener("load",function(event) {
+    initialize();
+    setupControlButtons();
+},false);
+
+let cellWidth = document.getElementById('cellWidth');
+
+cellWidth.addEventListener('change', (event) => {
+    let newWidth = event.target.value;
+    let newStyle = "td { height: "+newWidth+"px; }";
+    var styleSheet = document.createElement("style");
+    styleSheet.innerText = newStyle;
+    document.head.appendChild(styleSheet);
+});
+
+let cellBorder = document.getElementById('cellBorder');
+
+cellBorder.addEventListener('change', (event) => {
+    let newBorder = event.target.value;
+    let newStyle = "td.live { border-radius: "+newBorder+"%; }";
+    var styleSheet = document.createElement("style");
+    styleSheet.innerText = newStyle;
+    document.head.appendChild(styleSheet);
+});
+
+let colorPicker = document.getElementById('colorPicker');
+
+colorPicker.addEventListener('change', (event) => {
+    let newColor = event.target.value;
+    let newStyle = "td.live { background-color: "+newColor+"; }";
+    var styleSheet = document.createElement("style");
+    styleSheet.innerText = newStyle;
+    document.head.appendChild(styleSheet);
+});
+
+let bgColorPicker = document.getElementById('bgColorPicker');
+
+bgColorPicker.addEventListener('change', (event) => {
+    let newColor = event.target.value;
+    let newStyle = "body { background-color: "+newColor+"; }";
+    var styleSheet = document.createElement("style");
+    styleSheet.innerText = newStyle;
+    document.head.appendChild(styleSheet);
+});
 
 
+
+let rowsNumber = document.getElementById('rowsNumber');
+
+// rowsNumber.addEventListener('mouseup', (event) => {
+//     playing = false;
+
+//     clearInterval(clockSetInt);
+    
+//     // change the grid variables 
+//     rows = rowsNumber;
+
+//     document.getElementById("lifeTable").remove();
+
+//     // initialize();
+
+//     // playing = true;
+//     // runClock();
+//     // play();
+// });
