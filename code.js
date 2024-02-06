@@ -3,6 +3,8 @@ let canvasHeight = 300;
 
 let fontSize = 120; // default size for font
 
+let clockFill = false;
+
 let fonts = [
     "Arial",
     "Lato",
@@ -363,7 +365,11 @@ function drawClock() {
       if (typeof twoDArray[i][j] !== "undefined") {
         if (twoDArray[i][j] == 1) {
           var cell = document.getElementById(i + offsetY + "_" + (j + offsetX));
-          //cell.setAttribute("class", "live");
+          
+          if(clockFill) {
+            cell.setAttribute("class", "live");
+          }
+          
           grid[i + offsetY][j + offsetX] = 1;
         }
       }
@@ -399,11 +405,61 @@ function initFontPicker() {
         fontFaces[i].addEventListener('click', (event) => {
             let newFontFace = event.target.innerHTML;
             fontFace = newFontFace;
+            setCookie("font", newFontFace, 10000);
         });
     }
 }
 
 
+// cookies 
+
+function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+function eraseCookie(name) {   
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function loadStatesFromCookies() {
+
+    let cookies = {
+        cellBorder: getCookie("cellBorder"),
+        cellColor: getCookie("cellColor"),
+        bgColor: getCookie("bgColor"),
+        fill: getCookie("fill"),
+        font: getCookie("font"),
+        clockPrintTime: getCookie("clockPrintTime"),
+        reproduction: getCookie("reproduction"),
+        fontSize: getCookie("fontSize"),
+        fidelity: getCookie("fidelity")
+    };
+
+    if (cookies.cellBorder) setCellBorder(cookies.cellBorder); 
+    if (cookies.cellColor) setCellColor(cookies.cellColor);
+    if (cookies.bgColor) setBgColor(cookies.bgColor);
+    if (cookies.fill) isFill(cookies.fill);
+    if (cookies.font) fontFace = cookies.font;
+    if (cookies.clockPrintTime) setClockPrintTime(cookies.clockPrintTime);
+    if (cookies.reproduction) setReproduction(cookies.reproduction);
+    if (cookies.fontSize) setFontSize(cookies.fontSize);
+    if (cookies.fidelity) setFidelity(cookies.fidelity);
+}
 
 // Events
 
@@ -412,70 +468,87 @@ window.addEventListener("load",function(event) {
     setupControlButtons();
     startButtonHandler();
     initFontPicker();
+    loadStatesFromCookies();
 },false);
 
-let cellWidth = document.getElementById('cellWidth');
+// let cellWidth = document.getElementById('cellWidth');
 
-cellWidth.addEventListener('change', (event) => {
-    let newWidth = event.target.value;
-    let newStyle = "td { height: "+newWidth+"px; }";
-    var styleSheet = document.createElement("style");
-    styleSheet.innerText = newStyle;
-    document.head.appendChild(styleSheet);
-});
+// cellWidth.addEventListener('change', (event) => {
+//     setCellWidth(event.target.value);
+//     setCookie("cellWidth", newWidth, 10000);
+// });
+
+// function setCellWidth(val) {
+//     let newWidth = val;
+//     let newStyle = "td { height: "+newWidth+"px; }";
+//     var styleSheet = document.createElement("style");
+//     styleSheet.innerText = newStyle;
+//     document.head.appendChild(styleSheet);
+// }
 
 let cellBorder = document.getElementById('cellBorder');
 
 cellBorder.addEventListener('change', (event) => {
-    let newBorder = event.target.value;
+    setCellBorder(event.target.value); 
+    setCookie("cellBorder", event.target.value, 10000);
+});
+
+function setCellBorder(val) {
+    let newBorder = val;
     let newStyle = "td.live { border-radius: "+newBorder+"%; }";
     var styleSheet = document.createElement("style");
     styleSheet.innerText = newStyle;
     document.head.appendChild(styleSheet);
-});
+}
 
 let colorPicker = document.getElementById('colorPicker');
 
 colorPicker.addEventListener('change', (event) => {
-    let newColor = event.target.value;
+    setCellColor(event.target.value);
+    setCookie("cellColor", event.target.value, 10000);
+});
+
+function setCellColor(val) {
+    let newColor = val;
     let newStyle = "td.live { background-color: "+newColor+"; }";
     var styleSheet = document.createElement("style");
     styleSheet.innerText = newStyle;
     document.head.appendChild(styleSheet);
-});
+}
 
 let bgColorPicker = document.getElementById('bgColorPicker');
 
 bgColorPicker.addEventListener('change', (event) => {
-    let newColor = event.target.value;
+    setBgColor(event.target.value);
+    setCookie("bgColor", event.target.value, 10000);
+});
+
+function setBgColor(val) {
+    let newColor = val;
     let newStyle = "body { background-color: "+newColor+"; }";
     var styleSheet = document.createElement("style");
     styleSheet.innerText = newStyle;
     document.head.appendChild(styleSheet);
-});
-
+}
 
 
 let fidelity = document.getElementById('fidelity');
 
-fidelity.addEventListener('mouseup', (event) => {
+fidelity.addEventListener('mouseup', () => {
+    setFidelity(fidelity.value);
+    setCookie("fidelity", fidelity.value, 10000);
+});
 
-    // let rowStep = rows / 4;
-    // let colStep = cols / 6;
-
+function setFidelity(val) {
     let canvWidthStep = canvasWidth / 5;
     let canvHeightStep = canvasHeight / 5;
 
     playing = false;
 
     clearInterval(clockSetInt);
-    
-    // change the grid variables 
-    // rows = rowStep * fidelity.value;
-    // cols = colStep * fidelity.value;
 
-    canvasWidth = canvWidthStep * fidelity.value;
-    canvasHeight = canvHeightStep * fidelity.value;
+    canvasWidth = canvWidthStep * val;
+    canvasHeight = canvHeightStep * val;
 
     rows = Math.round(canvasHeight);
     cols = Math.round(canvasWidth);
@@ -487,13 +560,8 @@ fidelity.addEventListener('mouseup', (event) => {
     playing = true;
     runClock();
     play();
+}
 
-    // let newTdRatio = 0.05 * fidelity.value;
-    // let newStyle = "td { padding-bottom: "+newTdRatio+"%; }";
-    // var styleSheet = document.createElement("style");
-    // styleSheet.innerText = newStyle;
-    // document.head.appendChild(styleSheet);
-});
 
 addEventListener("resize", (event) => {
     setCellRatio();
@@ -503,22 +571,55 @@ addEventListener("resize", (event) => {
 let fontSizePicker = document.getElementById('fontsize');
 
 fontSizePicker.addEventListener('change', (event) => {
-    let newFontSize = event.target.value;
-    fontSize = newFontSize;
+    setFontSize(event.target.value);
+    setCookie("fontSize", event.target.value, 10000);
 });
+
+function setFontSize(val) {
+    let newFontSize = val;
+    fontSize = newFontSize;
+}
+
 
 let reproduction = document.getElementById('reproduction');
 
 reproduction.addEventListener('change', (event) => {
-    let newReproductionTime = event.target.value;
-    reproductionTime = newReproductionTime;
+    setReproduction(event.target.value); 
+    setCookie("reproduction", event.target.value, 10000);
 });
+
+function setReproduction(val) {
+    let newReproductionTime = val;
+    reproductionTime = newReproductionTime;
+}
 
 let clockPrintTime = document.getElementById('clockPrintTime');
 
 clockPrintTime.addEventListener('mouseup', (event) => {
-    let newClockPrintTime = event.target.value;
+    setClockPrintTime(event.target.value);
+    setCookie("clockPrintTime", event.target.value, 10000);
+});
+
+function setClockPrintTime(val) {
+    let newClockPrintTime = val;
     clearInterval(clockSetInt);
     clockInterval = newClockPrintTime;
-    runClock();
+    runClock();     
+}
+
+
+
+let fill = document.getElementById('fill');
+
+fill.addEventListener('change', (event) => {
+    isFill(fill.checked);
+    setCookie("fill", fill.checked, 10000);
 });
+
+function isFill(val) {
+    if(val == true) {
+        clockFill = true;
+    } else {
+        clockFill = false;
+    }
+}

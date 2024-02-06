@@ -103,3 +103,14 @@ input[type="color"] {
 	width: 32px;
 	height: 32px;
 }
+
+input[type="checkbox"] {
+	-webkit-appearance: none;
+	border: 1px solid black;
+	width: 20px;
+	height: 20px;
+}
+
+input[type="checkbox"]:checked {
+	background-color: black;
+}
