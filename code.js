@@ -399,7 +399,13 @@ function initFontPicker() {
         let p = document.createElement("p");
         p.innerHTML = face;
         p.classList.add(face.toLowerCase().replace(/ /g, "-"));
-        fontPicker.append(p);
+
+        let atRow = "row_1";
+        if(index >= fonts.length/2) {
+            atRow = "row_2";
+        }
+        
+        document.getElementById(atRow).append(p);
     }
 
     let fontFaces = document.querySelectorAll("#fontPicker p");

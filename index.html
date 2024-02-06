@@ -1,68 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset = "UTF-8" />
-        <title>The Time of Life</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>The Time of Life</title>
 
-        <!-- Reset Css -->
-        <link rel="stylesheet" href="reset.css"> 
+    <!-- Reset Css -->
+    <link rel="stylesheet" href="reset.css" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Astloch:wght@400;700&family=Bungee+Outline&family=Cabin+Sketch:wght@400;700&family=Codystar:wght@300;400&family=Fredericka+the+Great&family=Honk&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Londrina+Outline&family=Monoton&family=Monsieur+La+Doulaise&family=Pixelify+Sans:wght@400..700&family=Reggae+One&family=Rubik+Doodle+Triangles&family=Rubik+Glitch+Pop&family=Rubik+Lines&family=Rubik+Scribble&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="fonts.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Astloch:wght@400;700&family=Bungee+Outline&family=Cabin+Sketch:wght@400;700&family=Codystar:wght@300;400&family=Fredericka+the+Great&family=Honk&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Londrina+Outline&family=Monoton&family=Monsieur+La+Doulaise&family=Pixelify+Sans:wght@400..700&family=Reggae+One&family=Rubik+Doodle+Triangles&family=Rubik+Glitch+Pop&family=Rubik+Lines&family=Rubik+Scribble&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="fonts.css" />
 
-        <!-- App -->
-        <link rel="stylesheet" href="life.css"> 
-        <style id="userStyles"></style> 
-    </head>
-<body>
+    <!-- App -->
+    <link rel="stylesheet" href="life.css" />
+    <style id="userStyles"></style>
+  </head>
+  <body>
+    <div id="gridContainer"></div>
 
-    <div id="gridContainer">
-        
-    </div>
-    
     <div class="controls">
-    <button id="start"><span>Pause</span></button>
-    <button id="clear"><span>Clear</span></button>
-    
-    <!-- <label for="cellWidth">Cell width</label>
+      <button id="start"><span>Pause</span></button>
+      <button id="clear"><span>Clear</span></button>
+      <br />
+
+      <!-- <label for="cellWidth">Cell width</label>
     <input type="range" min="1" max="10" value="2" id="cellWidth"> -->
 
-    <label for="cellBorder">Cell border radius %</label>
-    <input type="range" min="0" max="100" value="100" id="cellBorder">
+      <div class="controls_1">
+        <div class="contr_row">
+          <div class="controlElement">
+            <label for="cellBorder">Cell border radius %</label>
+            <input type="range" min="0" max="100" value="100" id="cellBorder" />
+          </div>
 
-    <label for="fidelity">Fidelity</label>
-    <input type="range" min="1" max="10" value="5" id="fidelity">
+          <div class="controlElement">
+            <label for="fidelity">Fidelity</label>
+            <input type="range" min="1" max="10" value="5" id="fidelity" />
+          </div>
 
-    <label for="fontsize">Font size</label>
-    <input type="range" min="20" max="300" value="120" id="fontsize">
+          <div class="controlElement">
+            <label for="fontsize">Font size</label>
+            <input type="range" min="20" max="300" value="120" id="fontsize" />
+          </div>
 
-    <input type="color" id="colorPicker">
-    <input type="color" id="bgColorPicker">
+          <div class="controlElement">
+            <label for="colorPicker">Cell color</label>
+            <input type="color" id="colorPicker" />
+          </div>
 
-    <label for="reproduction">Reproduction Time</label>
-    <input type="range" min="10" max="1000" value="100" id="reproduction">
+          <div class="controlElement">
+            <label for="bgColorPicker">Bg color</label>
+            <input type="color" id="bgColorPicker" />
+          </div>
+        </div>
 
-    <label for="clockPrintTime">Clock Update Time</label>
-    <input type="range" min="10" max="10000" value="200" id="clockPrintTime">
-    
-    <label for="fill">Fill</label>
-    <input type="checkbox" id="fill">
+        <div class="contr_row">
+          <div class="controlElement">
+            <label for="reproduction">Reproduction Time</label>
+            <input
+              type="range"
+              min="10"
+              max="1000"
+              value="100"
+              id="reproduction"
+            />
+          </div>
 
-    <label for="cellBorderWidth">Cell Border Width</label>
-    <input type="range" min="0" max="5" value="0" id="cellBorderWidth">
+          <div class="controlElement">
+            <label for="clockPrintTime">Clock Update Time</label>
+            <input
+              type="range"
+              min="10"
+              max="10000"
+              value="200"
+              id="clockPrintTime"
+            />
+          </div>
 
-    <br>
-    <label for="cellBorderColor">Cell Border Color</label>
-    <input type="color" id="cellBorderColor">
+          <div class="controlElement">
+            <label for="fill">Fill</label>
+            <input type="checkbox" id="fill" />
+          </div>
 
-    <br>
+          <div class="controlElement">
+            <label for="cellBorderWidth">Cell Border Width</label>
+            <input
+              type="range"
+              min="0"
+              max="5"
+              value="0"
+              id="cellBorderWidth"
+            />
+          </div>
 
-    <div id="fontPicker">
-    </div>
+          <div class="controlElement">
+            <br />
+            <label for="cellBorderColor">Cell Border Color</label>
+            <input type="color" id="cellBorderColor" />
+          </div>
+        </div>
+      </div>
 
+      <br />
+      <br />
+
+      <div id="fontPicker">
+        <div class="frow" id="row_1"></div>
+        <div class="frow" id="row_2"></div>
+      </div>
     </div>
 
     <!-- <canvas id="clockCanvas" width="530" height="126"></canvas> -->
@@ -70,9 +120,5 @@
     <script src="two.js"></script>
     <script src="time.js"></script>
     <script src="code.js"></script>
-        
-    </body>
+  </body>
 </html>
-
-
-
