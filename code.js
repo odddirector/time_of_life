@@ -1,5 +1,5 @@
 let canvasWidth = 530;
-let canvasHeight = 126;
+let canvasHeight = 300;
 
 var rows = canvasHeight;
 var cols = canvasWidth;
@@ -304,7 +304,7 @@ function drawClock() {
   const timeString = now.toLocaleTimeString();
 
   let fontBase = defaultCanvasWidth; // selected default width for canvas
-  let fontSize = 137; // default size for font
+  let fontSize = 120; // default size for font
   
   let ratio = fontSize / fontBase;   // calc ratio
   let size = canvas.width * ratio;
@@ -317,8 +317,8 @@ function drawClock() {
   ctx.textBaseline = 'middle';
   ctx.fillStyle = 'black';
 
-  let x = canvas.width / 2;
-  let y = canvas.height / 1.64;
+  let x = canvas.width / 2.1;
+  let y = canvas.height / 1.9;
 
   ctx.fillText(timeString, x, y);
 
@@ -416,10 +416,10 @@ let fidelity = document.getElementById('fidelity');
 
 fidelity.addEventListener('mouseup', (event) => {
 
-    let rowStep = rows / 4;
-    let colStep = cols / 6;
+    // let rowStep = rows / 4;
+    // let colStep = cols / 6;
 
-    let canvWidthStep = canvasWidth / 7;
+    let canvWidthStep = canvasWidth / 5;
     let canvHeightStep = canvasHeight / 5;
 
     playing = false;
