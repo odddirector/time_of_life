@@ -4,7 +4,12 @@ body {
 }
 
 canvas {
-    opacity: 0;
+    opacity: 1;
+    border: 1px solid black;
+    z-index: 9999;
+    position: absolute;
+    left: 10px;
+    top: 10px;
 }
 
 .bungee-outline-regular {
@@ -21,15 +26,19 @@ table {
     background-color: transparent;
     border-spacing: 0;
     width: 100%;
+    height: 1vw;
     max-width: 100%;
+    border: 1px solid black;
 }
 
 td {
     border: none;
+    border: 0.5px solid black;
     /* border-radius: 3px; */
-    width: auto;
+    /* width: auto;
     height: 0;
-    padding-bottom: 0.13%;
+    padding-bottom: 0.13%; */
+    /* padding-bottom: 0.13%; */
 }
 
 button span {

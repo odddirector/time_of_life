@@ -1,5 +1,11 @@
-var rows = 180;
-var cols = 600;
+let canvasWidth = 530;
+let canvasHeight = 126;
+
+var rows = canvasHeight;
+var cols = canvasWidth;
+
+// required for setting the font size dynamically
+let defaultCanvasWidth = canvasWidth;
 
 var playing = false;
 
@@ -71,6 +77,7 @@ function createTable() {
     table.appendChild(tr);
   }
   gridContainer.appendChild(table);
+  setCellRatio();
 }
 
 function cellClickHandler() {
@@ -275,7 +282,18 @@ function drawClock() {
   
   if (playing == false) return;
 
-  const canvas = document.getElementById("clockCanvas");
+  let previousCanvas = document.getElementById("clockCanvas");
+  if(previousCanvas) {
+    previousCanvas.remove();
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.id = "clockCanvas";
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
+
+  document.body.insertBefore(canvas, document.getElementById("gridContainer"));
+  
   const ctx = canvas.getContext("2d");
 
   // Clear the canvas
@@ -285,14 +303,24 @@ function drawClock() {
   const now = new Date();
   const timeString = now.toLocaleTimeString();
 
+  let fontBase = defaultCanvasWidth; // selected default width for canvas
+  let fontSize = 137; // default size for font
+  
+  let ratio = fontSize / fontBase;   // calc ratio
+  let size = canvas.width * ratio;
+
   // Set font and color
   // Draw the time on the canvas
-  ctx.font = "137px Arial";
-//   ctx.strokeStyle = 'black';
-//   ctx.lineWidth = 8;
-//   ctx.strokeText(timeString, 0, 49);
+
+  ctx.font = size+"px Arial";
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
   ctx.fillStyle = 'black';
-  ctx.fillText(timeString, 0, 110);
+
+  let x = canvas.width / 2;
+  let y = canvas.height / 1.64;
+
+  ctx.fillText(timeString, x, y);
 
 
   // Convert canvas to 2D array
@@ -318,8 +346,8 @@ function drawClock() {
 
   //Draw the clock on a grid
   
-  let offsetX = 20;
-  let offsetY = 18;
+  let offsetX = 0;
+  let offsetY = 0;
 
   for (var i = 0; i < canvas.height; i++) {
     for (var j = 0; j < canvas.width; j++) {
@@ -384,25 +412,55 @@ bgColorPicker.addEventListener('change', (event) => {
 
 
 
-// let fidelity = document.getElementById('fidelity');
+let fidelity = document.getElementById('fidelity');
 
-// fidelity.addEventListener('mouseup', (event) => {
+fidelity.addEventListener('mouseup', (event) => {
 
-//     let rowStep = rows / 5;
-//     let colStep = cols / 5;
+    let rowStep = rows / 4;
+    let colStep = cols / 6;
 
-//     playing = false;
+    let canvWidthStep = canvasWidth / 7;
+    let canvHeightStep = canvasHeight / 5;
 
-//     clearInterval(clockSetInt);
+    playing = false;
+
+    clearInterval(clockSetInt);
     
-//     // change the grid variables 
-//     //rows = fidelity.value;
+    // change the grid variables 
+    // rows = rowStep * fidelity.value;
+    // cols = colStep * fidelity.value;
 
-//     document.getElementById("lifeTable").remove();
+    canvasWidth = canvWidthStep * fidelity.value;
+    canvasHeight = canvHeightStep * fidelity.value;
 
-//     initialize();
+    rows = Math.round(canvasHeight);
+    cols = Math.round(canvasWidth);
 
-//     playing = true;
-//     runClock();
-//     play();
-// });
+    document.getElementById("lifeTable").remove();
+
+    initialize();
+
+    playing = true;
+    runClock();
+    play();
+
+    // let newTdRatio = 0.05 * fidelity.value;
+    // let newStyle = "td { padding-bottom: "+newTdRatio+"%; }";
+    // var styleSheet = document.createElement("style");
+    // styleSheet.innerText = newStyle;
+    // document.head.appendChild(styleSheet);
+});
+
+addEventListener("resize", (event) => {
+    setCellRatio();
+});
+
+function setCellRatio() {
+    let gridContainer = document.getElementById("gridContainer");
+    let newTdHeight = gridContainer.offsetWidth / cols;
+
+    let newStyle = "td { height: "+newTdHeight+"px; width: "+newTdHeight+"px;  }";
+    var styleSheet = document.createElement("style");
+    styleSheet.innerText = newStyle;
+    document.head.appendChild(styleSheet);
+}
