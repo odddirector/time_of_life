@@ -87,3 +87,12 @@ input[type="range"] {
     cursor: pointer;
     width: 15rem;
   }
+    
+#fontPicker {
+    font-size: 24px;
+}
+
+#fontPicker p {
+    margin-bottom: 10px;
+    cursor: pointer;
+}

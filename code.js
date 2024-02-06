@@ -3,6 +3,26 @@ let canvasHeight = 300;
 
 let fontSize = 120; // default size for font
 
+let fonts = [
+    "Arial",
+    "Lato",
+    "Reggae One",
+    "Codystar",
+    "Monsieur La Doulaise",
+    "Fredericka the Great",
+    "Cabin Sketch",
+    "Astloch",
+    "Monoton",
+    "Rubik Doodle Triangles",
+    "Rubik Lines",
+    "Rubik Scribble",
+    "Rubik Glitch Pop",
+    "Londrina Outline",
+    "Bungee Outline"
+];
+
+let fontFace = fonts[0];
+
 var rows = canvasHeight;
 var cols = canvasWidth;
 
@@ -301,7 +321,7 @@ function drawClock() {
   // Set font and color
   // Draw the time on the canvas
 
-  ctx.font = size+"px Arial";
+  ctx.font = size+"px "+fontFace;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillStyle = 'black';
@@ -362,6 +382,28 @@ function setCellRatio() {
     document.head.appendChild(styleSheet);
 }
 
+function initFontPicker() {
+    let fontPicker = document.getElementById("fontPicker");
+
+    for (let index = 0; index < fonts.length; index++) {
+        const face = fonts[index];
+        let p = document.createElement("p");
+        p.innerHTML = face;
+        p.classList.add(face.toLowerCase().replace(/ /g, "-"));
+        fontPicker.append(p);
+    }
+
+    let fontFaces = document.querySelectorAll("#fontPicker p");
+
+    for (var i = 0; i < fontFaces.length; i++) {
+        fontFaces[i].addEventListener('click', (event) => {
+            let newFontFace = event.target.innerHTML;
+            fontFace = newFontFace;
+        });
+    }
+}
+
+
 
 // Events
 
@@ -369,6 +411,7 @@ window.addEventListener("load",function(event) {
     initialize();
     setupControlButtons();
     startButtonHandler();
+    initFontPicker();
 },false);
 
 let cellWidth = document.getElementById('cellWidth');
@@ -463,3 +506,6 @@ fontSizePicker.addEventListener('change', (event) => {
     let newFontSize = event.target.value;
     fontSize = newFontSize;
 });
+
+
+

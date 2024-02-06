@@ -1,0 +1,163 @@
+/* Fonts */
+
+.lato-thin {
+    font-family: "Lato", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  .lato-thin-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+  }
+  
+  .lato-light {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .lato-light-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  .lato {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .lato-regular-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .lato-bold {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .lato-bold-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  .lato-black {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .lato-black-italic {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+  }
+
+  .reggae-one {
+    font-family: "Reggae One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .codystar-light {
+    font-family: "Codystar", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .codystar {
+    font-family: "Codystar", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .monsieur-la-doulaise {
+    font-family: "Monsieur La Doulaise", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .fredericka-the-great {
+    font-family: "Fredericka the Great", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .cabin-sketch {
+    font-family: "Cabin Sketch", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .cabin-sketch-bold {
+    font-family: "Cabin Sketch", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .astloch {
+    font-family: "Astloch", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .astloch {
+    font-family: "Astloch", system-ui;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .monoton {
+    font-family: "Monoton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .rubik-doodle-triangles {
+    font-family: "Rubik Doodle Triangles", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .rubik-lines {
+    font-family: "Rubik Lines", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .rubik-scribble {
+    font-family: "Rubik Scribble", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .rubik-glitch-pop {
+    font-family: "Rubik Glitch Pop", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .londrina-outline {
+    font-family: "Londrina Outline", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .bungee-outline {
+    font-family: "Bungee Outline", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .arial {
+    font-family: "Arial", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
