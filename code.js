@@ -23,6 +23,9 @@ let fonts = [
     "Bungee Outline"
 ];
 
+let cellBorderWidthVar = 0;
+let cellBorderColorVar = "black";
+
 let fontFace = fonts[0];
 
 var rows = canvasHeight;
@@ -447,7 +450,9 @@ function loadStatesFromCookies() {
         clockPrintTime: getCookie("clockPrintTime"),
         reproduction: getCookie("reproduction"),
         fontSize: getCookie("fontSize"),
-        fidelity: getCookie("fidelity")
+        fidelity: getCookie("fidelity"),
+        cellBorderColor: getCookie("cellBorderColor"),
+        cellBorderWidth: getCookie("cellBorderWidth")
     };
 
     if (cookies.cellBorder) setCellBorder(cookies.cellBorder); 
@@ -459,6 +464,9 @@ function loadStatesFromCookies() {
     if (cookies.reproduction) setReproduction(cookies.reproduction);
     if (cookies.fontSize) setFontSize(cookies.fontSize);
     if (cookies.fidelity) setFidelity(cookies.fidelity);
+    if (cookies.cellBorderWidth) setBorderWidth(cookies.cellBorderWidth);
+    if (cookies.cellBorderColor) setCellBorderColor(cookies.cellBorderColor);
+    
 }
 
 // Events
@@ -622,4 +630,37 @@ function isFill(val) {
     } else {
         clockFill = false;
     }
+}
+
+let cellBorderWidth = document.getElementById('cellBorderWidth');
+
+cellBorderWidth.addEventListener('change', (event) => {
+    setBorderWidth(event.target.value);
+    setCookie("cellBorderWidth", event.target.value, 10000);
+});
+
+function setBorderWidth(val) {
+    let newWidth = val;
+    cellBorderWidthVar = val;
+    let newStyle = "td { border: "+newWidth+"px solid "+cellBorderColorVar+"; }";
+    var styleSheet = document.createElement("style");
+    styleSheet.innerText = newStyle;
+    document.head.appendChild(styleSheet);
+}
+
+let cellBorderColor = document.getElementById('cellBorderColor');
+
+cellBorderColor.addEventListener('change', (event) => {
+    setCellBorderColor(event.target.value);
+    setCookie("cellBorderColor", event.target.value, 10000);
+});
+
+function setCellBorderColor(val) {
+   
+    let newColor = val;
+    let newStyle = "td { border: "+cellBorderWidthVar+"px solid "+newColor+"; }";
+    var styleSheet = document.createElement("style");
+    styleSheet.innerText = newStyle;
+    document.head.appendChild(styleSheet);
+    
 }
