@@ -96,3 +96,10 @@ input[type="range"] {
     margin-bottom: 10px;
     cursor: pointer;
 }
+
+input[type="color"] {
+	-webkit-appearance: none;
+	border: 1px solid black;
+	width: 32px;
+	height: 32px;
+}
