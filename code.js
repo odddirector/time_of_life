@@ -304,7 +304,7 @@ function drawClock() {
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
 
-  document.body.insertBefore(canvas, document.getElementById("gridContainer"));
+  //document.body.insertBefore(canvas, document.getElementById("gridContainer"));
   
   const ctx = canvas.getContext("2d");
 

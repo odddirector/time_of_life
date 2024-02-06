@@ -5,7 +5,7 @@ body {
 
 canvas {
     opacity: 1;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     z-index: 9999;
     position: absolute;
     left: 10px;
@@ -28,12 +28,12 @@ table {
     width: 100%;
     height: 1vw;
     max-width: 100%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 td {
     border: none;
-    border: 0.5px solid black;
+    /* border: 0.5px solid black; */
     /* border-radius: 3px; */
     /* width: auto;
     height: 0;
