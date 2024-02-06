@@ -507,5 +507,18 @@ fontSizePicker.addEventListener('change', (event) => {
     fontSize = newFontSize;
 });
 
+let reproduction = document.getElementById('reproduction');
 
+reproduction.addEventListener('change', (event) => {
+    let newReproductionTime = event.target.value;
+    reproductionTime = newReproductionTime;
+});
 
+let clockPrintTime = document.getElementById('clockPrintTime');
+
+clockPrintTime.addEventListener('mouseup', (event) => {
+    let newClockPrintTime = event.target.value;
+    clearInterval(clockSetInt);
+    clockInterval = newClockPrintTime;
+    runClock();
+});
