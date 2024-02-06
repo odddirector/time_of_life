@@ -1,6 +1,8 @@
 let canvasWidth = 530;
 let canvasHeight = 300;
 
+let fontSize = 120; // default size for font
+
 var rows = canvasHeight;
 var cols = canvasWidth;
 
@@ -156,25 +158,13 @@ function setupControlButtons() {
 
 // clear the grid
 function clearButtonHandler() {
-  console.log("Clear the game: stop playing, clear the grid");
-
-  playing = false;
-  var startButton = document.getElementById("start");
-  startButton.innerHTML = "Start";
-  clearTimeout(timer);
-
-  var cellsList = document.getElementsByClassName("live");
-  // convert to array first, otherwise, you're working on a live node list
-  // and the update doesn't work!
-  var cells = [];
-  for (var i = 0; i < cellsList.length; i++) {
-    cells.push(cellsList[i]);
-  }
-
-  for (var i = 0; i < cells.length; i++) {
-    cells[i].setAttribute("class", "dead");
-  }
-  resetGrids;
+    for (var i = 0; i < canvasHeight; i++) {
+        for (var j = 0; j < canvasWidth; j++) {
+            var cell = document.getElementById(i + "_" + j);
+            cell.setAttribute("class", "dead");
+            grid[i][j] = 0;
+        }
+      }
 }
 
 // start/pause/continue the game
@@ -304,7 +294,6 @@ function drawClock() {
   const timeString = now.toLocaleTimeString();
 
   let fontBase = defaultCanvasWidth; // selected default width for canvas
-  let fontSize = 120; // default size for font
   
   let ratio = fontSize / fontBase;   // calc ratio
   let size = canvas.width * ratio;
@@ -363,11 +352,23 @@ function drawClock() {
 
 }
 
+function setCellRatio() {
+    let gridContainer = document.getElementById("gridContainer");
+    let newTdHeight = gridContainer.offsetWidth / cols;
+
+    let newStyle = "td { height: "+newTdHeight+"px; width: "+newTdHeight+"px;  }";
+    var styleSheet = document.createElement("style");
+    styleSheet.innerText = newStyle;
+    document.head.appendChild(styleSheet);
+}
+
+
 // Events
 
 window.addEventListener("load",function(event) {
     initialize();
     setupControlButtons();
+    startButtonHandler();
 },false);
 
 let cellWidth = document.getElementById('cellWidth');
@@ -455,12 +456,10 @@ addEventListener("resize", (event) => {
     setCellRatio();
 });
 
-function setCellRatio() {
-    let gridContainer = document.getElementById("gridContainer");
-    let newTdHeight = gridContainer.offsetWidth / cols;
 
-    let newStyle = "td { height: "+newTdHeight+"px; width: "+newTdHeight+"px;  }";
-    var styleSheet = document.createElement("style");
-    styleSheet.innerText = newStyle;
-    document.head.appendChild(styleSheet);
-}
+let fontSizePicker = document.getElementById('fontsize');
+
+fontSizePicker.addEventListener('change', (event) => {
+    let newFontSize = event.target.value;
+    fontSize = newFontSize;
+});

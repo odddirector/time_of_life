@@ -79,3 +79,11 @@ td.static {
     left: 0;
     background-color: white;
 }
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e2e2e2;
+    cursor: pointer;
+    width: 15rem;
+  }
