@@ -165,6 +165,7 @@ label, span, button {
     padding: 10px;
     z-index: 99999;
     width: 50%;
+    /* mix-blend-mode: difference; */
 }
 
 input {

@@ -3,6 +3,8 @@ let canvasHeight = 300;
 
 let fontSize = 120; // default size for font
 
+let fontYoffset = 0;
+
 let clockFill = false;
 
 let fonts = [
@@ -334,7 +336,7 @@ function drawClock() {
   let x = canvas.width / 2.1;
   let y = canvas.height / 1.9;
 
-  ctx.fillText(timeString, x, y);
+  ctx.fillText(timeString, x, y - fontYoffset);
 
 
   // Convert canvas to 2D array
@@ -458,7 +460,8 @@ function loadStatesFromCookies() {
         fontSize: getCookie("fontSize"),
         fidelity: getCookie("fidelity"),
         cellBorderColor: getCookie("cellBorderColor"),
-        cellBorderWidth: getCookie("cellBorderWidth")
+        cellBorderWidth: getCookie("cellBorderWidth"),
+        fontY: getCookie("fontY")
     };
 
     if (cookies.cellBorder) setCellBorder(cookies.cellBorder); 
@@ -472,6 +475,7 @@ function loadStatesFromCookies() {
     if (cookies.fidelity) setFidelity(cookies.fidelity);
     if (cookies.cellBorderWidth) setBorderWidth(cookies.cellBorderWidth);
     if (cookies.cellBorderColor) setCellBorderColor(cookies.cellBorderColor);
+    if (cookies.fontY) setfontY(cookies.fontY);
     
 }
 
@@ -669,4 +673,16 @@ function setCellBorderColor(val) {
     styleSheet.innerText = newStyle;
     document.head.appendChild(styleSheet);
     
+}
+
+
+let fontY = document.getElementById('fontY');
+
+fontY.addEventListener('change', (event) => {
+    setfontY(event.target.value);
+    setCookie("fontY", event.target.value, 10000);
+});
+
+function setfontY(val) {
+    fontYoffset = val;
 }
