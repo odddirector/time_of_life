@@ -557,6 +557,11 @@ fidelity.addEventListener('mouseup', () => {
     setCookie("fidelity", fidelity.value, 10000);
 });
 
+fidelity.addEventListener('touchend', () => {
+    setFidelity(fidelity.value);
+    setCookie("fidelity", fidelity.value, 10000);
+});
+
 function setFidelity(val) {
     let canvWidthStep = canvasWidth / 5;
     let canvHeightStep = canvasHeight / 5;
@@ -614,6 +619,11 @@ function setReproduction(val) {
 let clockPrintTime = document.getElementById('clockPrintTime');
 
 clockPrintTime.addEventListener('mouseup', (event) => {
+    setClockPrintTime(event.target.value);
+    setCookie("clockPrintTime", event.target.value, 10000);
+});
+
+clockPrintTime.addEventListener('touchend', (event) => {
     setClockPrintTime(event.target.value);
     setCookie("clockPrintTime", event.target.value, 10000);
 });
